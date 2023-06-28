@@ -29,5 +29,6 @@ def test_discount_price (test_ClassItem_Apple):
     """
     Проверка функции расчёта скидки
     """
-    result = test_ClassItem_Apple.apply_discount()
+    test_ClassItem_Apple.apply_discount()
+    result = test_ClassItem_Apple.price
     return result == 30
