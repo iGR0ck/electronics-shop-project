@@ -32,3 +32,9 @@ def test_discount_price (test_ClassItem_Apple):
     test_ClassItem_Apple.apply_discount()
     result = test_ClassItem_Apple.price
     return result == 30
+
+
+# lesson 2
+def test_property_name (test_ClassItem_Apple):
+    test_ClassItem_Apple.name = "Можжевельник"
+    assert test_ClassItem_Apple.name == "Можжевель"
