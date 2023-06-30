@@ -22,6 +22,7 @@ class Item:
         self.quantity = quantity
 
     #класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
+    # путь к файлу менять вручную, при использовании os path или коротком пути выдавало ошибку FileNotFoundError
     @classmethod
     def instantiate_from_csv(cls):
         with open('/Users/igorpetushkov/PycharmProjects/electronics-shop-project/src/items.csv', newline='', encoding='windows-1251') as csvfile:
