@@ -1,3 +1,7 @@
+import csv
+import os
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -17,18 +21,36 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+    #класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
+    @classmethod
+    def instantiate_from_csv(cls):
+        with open('/Users/igorpetushkov/PycharmProjects/electronics-shop-project/src/items.csv', newline='', encoding='windows-1251') as csvfile:
+            reader = csv.DictReader(csvfile)
+            Item.all = []
+            for row in reader:
+                Item.all.append(Item(row['name'], row['price'], row['quantity']))
+        return Item.all
 
-    #lesson 2
+    # lesson 2
     @property
-    def name (self):
+    def name(self):
         return self.__name
 
-    #lesson 2
+        # lesson 2
     @name.setter
-    def name (self, item_name):
+    def name(self, item_name):
         self.__name = item_name
         if len(self.__name) > 10:
             self.__name = self.__name[0:9]
+
+
+    #статический метод, возвращающий число из числа-строки
+    @staticmethod
+    def string_to_number(number: str):
+        int_number = int(float(number))
+        return int_number
+
+
 
     def calculate_total_price(self) -> float:
         """
@@ -46,3 +68,7 @@ class Item:
         discount = self.price * Item.pay_rate
         self.price = discount
         return self.price
+
+
+
+

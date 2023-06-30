@@ -4,6 +4,7 @@ import pytest
 from src.item import Item
 
 
+
 @pytest.fixture
 def test_ClassItem_Apple():
     return Item('Яблоко', 30, 60)
@@ -38,3 +39,14 @@ def test_discount_price (test_ClassItem_Apple):
 def test_property_name (test_ClassItem_Apple):
     test_ClassItem_Apple.name = "Можжевельник"
     assert test_ClassItem_Apple.name == "Можжевель"
+
+
+def test_string_to_number (test_ClassItem_Apple):
+    assert test_ClassItem_Apple.string_to_number('5') == 5
+    assert test_ClassItem_Apple.string_to_number('5.0') == 5
+    assert test_ClassItem_Apple.string_to_number('5.5') == 5
+
+
+def test_instantiate_from_csv ():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
