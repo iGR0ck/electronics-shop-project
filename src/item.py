@@ -1,6 +1,9 @@
 import csv
-import os
+from pathlib import Path
 
+BASE_DIR = Path(__file__).resolve().parent
+
+csv_file_dir = BASE_DIR.joinpath('items.csv')
 
 class Item:
     """
@@ -21,15 +24,15 @@ class Item:
         self.price = price
         self.quantity = quantity
 
-    #класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
+    # класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
     # путь к файлу менять вручную, при использовании os path или коротком пути выдавало ошибку FileNotFoundError
     @classmethod
     def instantiate_from_csv(cls):
-        with open('/Users/igorpetushkov/PycharmProjects/electronics-shop-project/src/items.csv', newline='', encoding='windows-1251') as csvfile:
+        with open(csv_file_dir, newline='', encoding='windows-1251') as csvfile:
             reader = csv.DictReader(csvfile)
             Item.all = []
             for row in reader:
-                Item.all.append(Item(row['name'], row['price'], row['quantity']))
+                Item.all.append(Item(row['name'], cls.string_to_number(row['price']), cls.string_to_number(row['quantity'])))
         return Item.all
 
     # lesson 2
