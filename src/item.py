@@ -24,6 +24,19 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+
+    def __repr__(self):
+        """
+        Возвращает название, цену и количество
+        """
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """
+        Возвращает название
+        """
+        return self.name
+
     # класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
     # путь к файлу менять вручную, при использовании os path или коротком пути выдавало ошибку FileNotFoundError
     @classmethod
@@ -72,7 +85,3 @@ class Item:
         discount = self.price * Item.pay_rate
         self.price = discount
         return self.price
-
-
-
-
