@@ -2,6 +2,8 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
+
 
 
 
@@ -60,3 +62,18 @@ def test_repr_for_item_class ():
 def test_str_for_item_class ():
     item = Item("Смартфон", 10000, 20)
     assert str(item) == 'Смартфон'
+
+
+def test_add_in_Item ():
+    class Test_cls:
+        def __init__(self, quantity: int):
+            self.quantity = quantity
+
+    test_ex = Test_cls (5)
+    item1 = Item("Смартфон", 10000, 20)
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+
+    assert item1 + item1 == 40
+    assert item1 + test_ex == "Эти экземпляры нельзя сложить"
+    assert item1 + phone1 == 25
+    assert item1 + 10 == "Эти экземпляры нельзя сложить"

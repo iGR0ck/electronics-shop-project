@@ -37,6 +37,14 @@ class Item:
         """
         return self.name
 
+
+    def __add__(self, other):
+        if issubclass(other.__class__, Item):
+            if isinstance(self, Item) and isinstance(other, other.__class__):
+                return self.quantity + other.quantity
+        else:
+            return "Эти экземпляры нельзя сложить"
+
     # класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
     # путь к файлу менять вручную, при использовании os path или коротком пути выдавало ошибку FileNotFoundError
     @classmethod
