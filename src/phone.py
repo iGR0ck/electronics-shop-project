@@ -10,9 +10,11 @@ class Phone(Item):
 
 
     def __repr__(self):
-        return f"{self.__class__.__name__}('{self.name}', " \
-               f"{self.price}, {self.quantity}, " \
-               f"{self.number_of_sim})"
+        return (
+            f"{self.__class__.__name__}('{self.name}', "
+            f"{self.price}, {self.quantity}, "
+            f"{self.number_of_sim})"
+        )
 
     @property
     def number_of_sim(self):

@@ -5,13 +5,13 @@ from src.phone import Phone
 
 
 @pytest.fixture
-def test_ClassPhone_Iphone():
+def test_сlass_phone_iphone():
     return Phone("iPhone 14", 120_000, 5, 2)
 
 
-def test_Phone_attributes (test_ClassPhone_Iphone):
+def test_phone_attributes (test_сlass_phone_iphone):
 
-    phone1 = test_ClassPhone_Iphone
+    phone1 = test_сlass_phone_iphone
     assert str(phone1) == 'iPhone 14'
     assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
     assert phone1.number_of_sim == 2
@@ -26,7 +26,7 @@ def test_sims_more_zero ():
     with pytest.raises(ValueError):
         phone1.number_of_sim = 0
 
-def test_add_in_Phone (test_ClassPhone_Iphone):
+def test_add_in_phone (test_сlass_phone_iphone):
 
     class Test_cls:
         def __init__(self, quantity: int):
@@ -34,7 +34,7 @@ def test_add_in_Phone (test_ClassPhone_Iphone):
 
     test_ex = Test_cls (5)
     item1 = Item("Смартфон", 10000, 20)
-    phone1 = test_ClassPhone_Iphone
+    phone1 = test_сlass_phone_iphone
 
     assert phone1 + phone1 == 10
     assert phone1 + test_ex == "Эти экземпляры нельзя сложить"

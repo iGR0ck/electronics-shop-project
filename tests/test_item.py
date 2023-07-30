@@ -8,45 +8,45 @@ from src.phone import Phone
 
 
 @pytest.fixture
-def test_ClassItem_Apple():
+def test_class_item_apple():
     return Item('Яблоко', 30, 60)
 
-def test_init_ClassItem (test_ClassItem_Apple):
+def test_init_class_item (test_class_item_apple):
     """
     Проверка метода __init__
     """
-    assert test_ClassItem_Apple.name == "Яблоко"
-    assert test_ClassItem_Apple.price == 30
-    assert test_ClassItem_Apple.quantity == 60
+    assert test_class_item_apple.name == "Яблоко"
+    assert test_class_item_apple.price == 30
+    assert test_class_item_apple.quantity == 60
 
 
-def test_calculate_price (test_ClassItem_Apple):
+def test_calculate_price (test_class_item_apple):
     """
     Проверка подсчёта общей стоимости товара
     """
-    result = test_ClassItem_Apple.calculate_total_price()
+    result = test_class_item_apple.calculate_total_price()
     assert result == 1800
 
 
-def test_discount_price (test_ClassItem_Apple):
+def test_discount_price (test_class_item_apple):
     """
     Проверка функции расчёта скидки
     """
-    test_ClassItem_Apple.apply_discount()
-    result = test_ClassItem_Apple.price
+    test_class_item_apple.apply_discount()
+    result = test_class_item_apple.price
     return result == 30
 
 
 # lesson 2
-def test_property_name (test_ClassItem_Apple):
-    test_ClassItem_Apple.name = "Можжевельник"
-    assert test_ClassItem_Apple.name == "Можжевель"
+def test_property_name (test_class_item_apple):
+    test_class_item_apple.name = "Можжевельник"
+    assert test_class_item_apple.name == "Можжевель"
 
 
-def test_string_to_number (test_ClassItem_Apple):
-    assert test_ClassItem_Apple.string_to_number('5') == 5
-    assert test_ClassItem_Apple.string_to_number('5.0') == 5
-    assert test_ClassItem_Apple.string_to_number('5.5') == 5
+def test_string_to_number (test_class_item_apple):
+    assert test_class_item_apple.string_to_number('5') == 5
+    assert test_class_item_apple.string_to_number('5.0') == 5
+    assert test_class_item_apple.string_to_number('5.5') == 5
 
 
 def test_instantiate_from_csv ():
