@@ -1,9 +1,7 @@
 import csv
-from pathlib import Path
+import os
 
-BASE_DIR = Path(__file__).resolve().parent
-
-csv_file_dir = BASE_DIR.joinpath('items.csv')
+file_directory = os.path.abspath('../src/items.csv')
 
 class Item:
     """
@@ -48,13 +46,27 @@ class Item:
     # класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
     # путь к файлу менять вручную, при использовании os path или коротком пути выдавало ошибку FileNotFoundError
     @classmethod
-    def instantiate_from_csv(cls):
-        with open(csv_file_dir, newline='', encoding='windows-1251') as csvfile:
-            reader = csv.DictReader(csvfile)
-            Item.all = []
-            for row in reader:
-                Item.all.append(Item(row['name'], cls.string_to_number(row['price']), cls.string_to_number(row['quantity'])))
-        return Item.all
+    def instantiate_from_csv(cls, path_file=file_directory):
+        """
+        Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
+        Если файл csv отсутствует, то вызывается исключение.
+        """
+        try:
+            if not os.path.exists(path_file):
+                raise FileNotFoundError('Отсутствует файл items.csv')
+            with open(path_file, newline='', encoding='windows-1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                Item.all = []
+                for row in reader:
+                    if set(row) != {'name', 'price', 'quantity'}:
+                        raise InstantiateCSVError()
+                    Item.all.append(Item(row['name'], cls.string_to_number(row['price']), cls.string_to_number(row['quantity'])))
+                return Item.all
+
+        except FileNotFoundError:
+            raise
+        except Exception:
+            raise InstantiateCSVError()
 
     # lesson 2
     @property
@@ -93,3 +105,13 @@ class Item:
         discount = self.price * Item.pay_rate
         self.price = discount
         return self.price
+
+
+class InstantiateCSVError(Exception):
+    """
+    Исключение всплывающее при ошибке чтения файла.
+    """
+
+    def __init__(self, message="Файл item.csv поврежден"):
+        super().__init__(message)
+        self.message = message
